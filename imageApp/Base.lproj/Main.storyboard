@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Cu5-vG-51e">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -49,8 +50,7 @@
                                                         <constraint firstAttribute="height" constant="44" id="i9I-ko-4WA"/>
                                                         <constraint firstAttribute="width" constant="44" id="vPd-gx-iEr"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="Like" imagePadding="0.0"/>
+                                                    <state key="normal" image="Like"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -88,13 +88,14 @@
                             <constraint firstItem="GSw-xT-2PE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yZV-5M-1TC"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="eU4-Th-Cdx"/>
                     <connections>
                         <outlet property="tableView" destination="GSw-xT-2PE" id="shS-sV-KiO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="72.51908396946564" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="-318" y="-15"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="sAG-Au-5ot">
@@ -112,38 +113,40 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Lastname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvp-0Y-UTo">
-                                <rect key="frame" x="16" y="169" width="259" height="27.666666666666657"/>
+                                <rect key="frame" x="16" y="169" width="253" height="27.666666666666657"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9c-Q9-zr2">
-                                <rect key="frame" x="16" y="195" width="643" height="16"/>
+                                <rect key="frame" x="16" y="195" width="637" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.68235294117647061" green="0.68627450980392157" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CO9-1j-k2d">
-                                <rect key="frame" x="16" y="221" width="665" height="16"/>
+                                <rect key="frame" x="16" y="221" width="659" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJ7-Ey-NTr">
-                                <rect key="frame" x="327" y="114" width="48" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJ7-Ey-NTr">
+                                <rect key="frame" x="345" y="114" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="P5a-W0-xXu"/>
                                     <constraint firstAttribute="height" constant="24" id="gTB-91-uW0"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Exit"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Exit"/>
+                                <connections>
+                                    <action selector="didTapExitButton:" destination="Sxy-YF-5ff" eventType="touchUpInside" id="jvd-OK-hqb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uLU-uK-5bQ"/>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="e9c-Q9-zr2" firstAttribute="trailing" secondItem="uLU-uK-5bQ" secondAttribute="trailing" constant="260" id="8jB-OP-8ek"/>
-                            <constraint firstItem="qJ7-Ey-NTr" firstAttribute="leading" secondItem="uLU-uK-5bQ" secondAttribute="leading" constant="327" id="AU7-gJ-I40"/>
                             <constraint firstAttribute="trailing" secondItem="zvp-0Y-UTo" secondAttribute="trailing" constant="124" id="D7f-QP-0AU"/>
                             <constraint firstItem="e9c-Q9-zr2" firstAttribute="top" secondItem="uLU-uK-5bQ" secondAttribute="top" constant="136" id="DYd-nG-kHX"/>
                             <constraint firstItem="CO9-1j-k2d" firstAttribute="leading" secondItem="uLU-uK-5bQ" secondAttribute="leading" constant="16" id="EvE-Xg-XWv"/>
@@ -158,9 +161,9 @@
                             <constraint firstItem="uLU-uK-5bQ" firstAttribute="trailing" secondItem="qJ7-Ey-NTr" secondAttribute="trailing" constant="24" id="mKK-ik-bUl"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="Active" id="BJo-3x-VSO"/>
                     <connections>
-                        <outlet property="UserPhoto" destination="wTu-EB-j0a" id="jkT-01-g4P"/>
-                        <outlet property="exitIcon" destination="qJ7-Ey-NTr" id="cM3-0R-lVS"/>
+                        <outlet property="exitButton" destination="qJ7-Ey-NTr" id="Kov-U8-Xd8"/>
                         <outlet property="profileUserName" destination="zvp-0Y-UTo" id="AYa-y0-yjN"/>
                         <outlet property="profileUserNickname" destination="e9c-Q9-zr2" id="uZh-NW-7U6"/>
                         <outlet property="profileUserText" destination="CO9-1j-k2d" id="6II-vj-6Kl"/>
@@ -171,11 +174,39 @@
             </objects>
             <point key="canvasLocation" x="-318.32061068702291" y="-679.57746478873241"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Rsn-HN-PCT">
+            <objects>
+                <tabBarController id="Cu5-vG-51e" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3K1-O2-XEW">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="0.0" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" systemColor="tableBackgroundColor"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <tabBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" red="0.1019607843" green="0.1058823529" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        </tabBarAppearance>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Sxy-YF-5ff" kind="relationship" relationship="viewControllers" id="BS1-9M-lIg"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="C1n-7x-RZo"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Ch-75-VSe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1187" y="-287"/>
+        </scene>
     </scenes>
     <resources>
         <image name="0" width="1600" height="1059"/>
+        <image name="Active" width="30" height="30"/>
         <image name="Exit" width="24" height="24"/>
         <image name="Like" width="42" height="42"/>
         <image name="UserPhoto" width="70" height="70"/>
+        <image name="tab_editorial_active" width="30" height="30"/>
+        <systemColor name="tableBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

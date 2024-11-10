@@ -5,10 +5,16 @@
 
 import UIKit
 
-class ProfileViewController {
+class ProfileViewController: UIViewController {
     @IBOutlet weak var userPhoto: UIImageView!
-    @IBOutlet weak var exitIcon: UIButton!
+    
     @IBOutlet weak var profileUserName: UILabel!
     @IBOutlet weak var profileUserNickname: UILabel!
     @IBOutlet weak var profileUserText: UILabel!
+    
+    @IBOutlet weak var exitButton: UIButton!
+    
+    @IBAction private func didTapExitButton(_ sender: Any) {
+    }
+    
 }
