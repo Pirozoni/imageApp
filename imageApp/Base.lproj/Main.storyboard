@@ -91,7 +91,7 @@
                     <navigationItem key="navigationItem" id="2WF-Cb-KUz"/>
                     <connections>
                         <outlet property="tableView" destination="GSw-xT-2PE" id="shS-sV-KiO"/>
-                        <segue destination="KyH-Ri-LaU" kind="show" identifier="ShowSingleImage" id="eB0-WY-CeG"/>
+                        <segue destination="KyH-Ri-LaU" kind="presentation" identifier="ShowSingleImage" id="eB0-WY-CeG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -178,22 +178,36 @@
         <!--Single Image View Controller-->
         <scene sceneID="nnp-pg-8gP">
             <objects>
-                <viewController id="KyH-Ri-LaU" customClass="SingleImageViewController" customModule="imageApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="KyH-Ri-LaU" customClass="SingleImageViewController" customModule="imageApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g8B-fx-iac">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="AIu-6q-jMf">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZb-FJ-pOT">
+                                <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="4NV-6j-AL3"/>
+                                    <constraint firstAttribute="width" constant="48" id="V1c-w8-sGn"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Backward"/>
+                                <connections>
+                                    <action selector="backButton:" destination="KyH-Ri-LaU" eventType="touchUpInside" id="daH-5x-Yes"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8B3-FR-8I4"/>
                         <color key="backgroundColor" red="0.1019607843" green="0.1058823529" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="8B3-FR-8I4" firstAttribute="trailing" secondItem="AIu-6q-jMf" secondAttribute="trailing" id="I4d-Kp-wLp"/>
-                            <constraint firstItem="AIu-6q-jMf" firstAttribute="top" secondItem="8B3-FR-8I4" secondAttribute="top" id="J4m-dW-gYH"/>
-                            <constraint firstItem="8B3-FR-8I4" firstAttribute="bottom" secondItem="AIu-6q-jMf" secondAttribute="bottom" id="KSI-r4-Oct"/>
-                            <constraint firstItem="AIu-6q-jMf" firstAttribute="leading" secondItem="8B3-FR-8I4" secondAttribute="leading" id="bmh-PW-wJj"/>
+                            <constraint firstItem="AIu-6q-jMf" firstAttribute="bottom" secondItem="g8B-fx-iac" secondAttribute="bottom" id="2u7-Dr-Kbo"/>
+                            <constraint firstItem="dZb-FJ-pOT" firstAttribute="top" secondItem="8B3-FR-8I4" secondAttribute="top" constant="8" id="Nid-K4-v3K"/>
+                            <constraint firstItem="dZb-FJ-pOT" firstAttribute="leading" secondItem="8B3-FR-8I4" secondAttribute="leading" constant="8" id="dB2-OD-ZeZ"/>
+                            <constraint firstItem="AIu-6q-jMf" firstAttribute="trailing" secondItem="g8B-fx-iac" secondAttribute="trailing" id="fRd-LY-ncm"/>
+                            <constraint firstItem="AIu-6q-jMf" firstAttribute="top" secondItem="g8B-fx-iac" secondAttribute="top" id="jQ1-sU-Wwz"/>
+                            <constraint firstItem="AIu-6q-jMf" firstAttribute="leading" secondItem="g8B-fx-iac" secondAttribute="leading" id="rZU-Gb-jvR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dT6-fi-4Mf"/>
@@ -255,6 +269,7 @@
     <resources>
         <image name="0" width="1600" height="1059"/>
         <image name="Active" width="30" height="30"/>
+        <image name="Backward" width="24" height="24"/>
         <image name="Exit" width="24" height="24"/>
         <image name="Like" width="42" height="42"/>
         <image name="UserPhoto" width="70" height="70"/>

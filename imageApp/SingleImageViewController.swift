@@ -19,5 +19,9 @@ final class SingleImageViewController: UIViewController {
         imageView.image = image
     }
     
+    
+    @IBAction private func backButton(_ sender: Any) {
+        dismiss( animated: true, completion: nil)
+    }
 }
 
