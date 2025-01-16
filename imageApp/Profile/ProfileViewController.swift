@@ -9,7 +9,6 @@ final class ProfileViewController: UIViewController {
     private lazy var avatarImageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "UserPhoto")
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
@@ -18,21 +17,18 @@ final class ProfileViewController: UIViewController {
         let button = UIButton()
         let buttonImage = UIImage(named: "Exit")
         button.setImage(buttonImage, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
 
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 23.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private lazy var loginNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
 
     }()
@@ -40,7 +36,6 @@ final class ProfileViewController: UIViewController {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13.0)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -92,12 +87,11 @@ final class ProfileViewController: UIViewController {
     }
 
     private func drawSelf() {
-        view.addSubview(avatarImageView)
-        view.addSubview(logoutButton)
-        view.addSubview(nameLabel)
-        view.addSubview(loginNameLabel)
-        view.addSubview(descriptionLabel)
-        
+        [avatarImageView, logoutButton, nameLabel, loginNameLabel, descriptionLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
+        }
+
         let avatarImageViewConstrains = self.avatarImageViewConstrains()
         let logoutButtonConstrains = self.logoutButtonConstrains()
         let nameLabelConstrains = self.nameLabelConstrains()
@@ -113,14 +107,14 @@ final class ProfileViewController: UIViewController {
     }
 
     private func setupView() {
-        self.nameLabel.text = "Екатерина Новикова"
-        self.nameLabel.textColor = .ypWhite
+        nameLabel.text = "Екатерина Новикова"
+        nameLabel.textColor = .ypWhite
         
-        self.loginNameLabel.text = "@ekaterina_nov"
-        self.loginNameLabel.textColor = .ypGray
+        loginNameLabel.text = "@ekaterina_nov"
+        loginNameLabel.textColor = .ypGray
         
-        self.descriptionLabel.text = "Hello, World!"
-        self.descriptionLabel.textColor = .ypWhite
+        descriptionLabel.text = "Hello, World!"
+        descriptionLabel.textColor = .ypWhite
     }
 }
 
