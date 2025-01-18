@@ -43,7 +43,9 @@ final class AuthViewController: UIViewController {
     // MARK: - Extension
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        //TODO: process code
+        vc.dismiss(animated: true) // Закрыли WebView
+        
+        delegate?.authViewController(self, didAuthenticateWithCode: code)
     }
 
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
