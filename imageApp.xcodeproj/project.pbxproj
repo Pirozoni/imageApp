@@ -30,7 +30,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C3B06FEB2CDBC8E100AF5375 /* Exceptions for "imageApp" folder in "imageApp" target */ = {
+		C386A0D32D3ABE17002E76A2 /* Exceptions for "imageApp" folder in "imageApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -43,7 +43,7 @@
 		C3490DDF2CCBD6BC0092BC13 /* imageApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				C3B06FEB2CDBC8E100AF5375 /* Exceptions for "imageApp" folder in "imageApp" target */,
+				C386A0D32D3ABE17002E76A2 /* Exceptions for "imageApp" folder in "imageApp" target */,
 			);
 			path = imageApp;
 			sourceTree = "<group>";
@@ -56,6 +56,11 @@
 		C3490E002CCBD6C00092BC13 /* imageAppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = imageAppUITests;
+			sourceTree = "<group>";
+		};
+		C386A0D42D3AC3E6002E76A2 /* Auth */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -92,6 +97,7 @@
 				C3490DF62CCBD6C00092BC13 /* imageAppTests */,
 				C3490E002CCBD6C00092BC13 /* imageAppUITests */,
 				C3490DDE2CCBD6BC0092BC13 /* Products */,
+				C386A0D42D3AC3E6002E76A2 /* Auth */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +128,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				C3490DDF2CCBD6BC0092BC13 /* imageApp */,
+				C386A0D42D3AC3E6002E76A2 /* Auth */,
 			);
 			name = imageApp;
 			packageProductDependencies = (
