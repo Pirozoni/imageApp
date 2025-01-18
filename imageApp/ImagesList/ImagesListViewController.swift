@@ -1,6 +1,5 @@
 //  ViewController.swift
 //  imageApp
-//
 //  Created by Надежда Пономарева on 25.10.2024.
 
 import UIKit
@@ -11,6 +10,7 @@ final class ImagesListViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     
     // MARK: - Properties
+    private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     // MARK: - Private Properties
     private let photosName: [String] = Array(0..<20).map{ "\($0)"}
@@ -24,9 +24,25 @@ final class ImagesListViewController: UIViewController {
     // MARK: - Overrides Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 200
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == showSingleImageSegueIdentifier {
+                guard
+                    let viewController = segue.destination as? SingleImageViewController,
+                    let indexPath = sender as? IndexPath
+                else {
+                    assertionFailure("Invalid segue destination")
+                    return
+                }
+
+                let image = UIImage(named: photosName[indexPath.row])
+                viewController.image = image
+            } else {
+                super.prepare(for: segue, sender: sender)
+            }
+        }
 }
     // MARK: - Extensions
 extension ImagesListViewController {
@@ -46,7 +62,7 @@ extension ImagesListViewController {
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
     }
 }
 
