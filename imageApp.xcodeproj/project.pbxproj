@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C386A0E82D3C637F002E76A2 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C386A0E72D3C6371002E76A2 /* SplashViewController.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C3490DF42CCBD6C00092BC13 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		C3490DDD2CCBD6BC0092BC13 /* imageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3490DF32CCBD6C00092BC13 /* imageAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = imageAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3490DFD2CCBD6C00092BC13 /* imageAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = imageAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C386A0E72D3C6371002E76A2 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -98,6 +103,7 @@
 				C3490E002CCBD6C00092BC13 /* imageAppUITests */,
 				C3490DDE2CCBD6BC0092BC13 /* Products */,
 				C386A0D42D3AC3E6002E76A2 /* Auth */,
+				C386A0E72D3C6371002E76A2 /* SplashViewController.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C386A0E82D3C637F002E76A2 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
