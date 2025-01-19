@@ -8,6 +8,15 @@ final class SplashViewController: UIViewController {
     private let oauth2TokenStorage = OAuth2TokenStorage.shared
 
     // MARK: - Override Methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
             if oauth2TokenStorage.token != nil {
@@ -16,25 +25,6 @@ final class SplashViewController: UIViewController {
                 performSegue(withIdentifier: Constants.showAuthenticationScreenSegueIdentifier, sender: nil)
             }
         }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        if let token = oauth2TokenStorage.token {
-//            switchToTabBarController()
-//        } else {
-//            performSegue(withIdentifier: ShowAuthenticationScreenSegueIdentifier, sender: nil)
-//        }
-//    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
-    }
 
     // MARK: - Private Methods
     private func switchToTabBarController() {

@@ -62,5 +62,4 @@ final class OAuth2Service {
           }
           task.resume()
       }
- 
 }
