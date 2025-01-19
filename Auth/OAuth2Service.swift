@@ -2,8 +2,6 @@ import Foundation
 
 final class OAuth2Service {
     static let shared = OAuth2Service()
-    private init() {}
-    
     private let storage = OAuth2TokenStorage.shared
     private let urlSession = URLSession.shared
     private let decoder: JSONDecoder = {
@@ -11,6 +9,7 @@ final class OAuth2Service {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
+    private init() {}
     
     func makeOAuthTokenRequest(code: String) -> URLRequest? {
            guard var urlComponents = URLComponents(string: Constants.unsplashGetTokenURLString) else {

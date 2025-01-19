@@ -8,7 +8,7 @@ final class AuthViewController: UIViewController {
     
     // MARK: - Private Properties
     private let showWebViewSegueIdentifier = "ShowWebView"
-    private let oauth2Servise = OAuth2Service.shared
+    private let oauth2Serviсe = OAuth2Service.shared
     weak var delegate: AuthViewControllerDelegate?
     
     // MARK: - Override Methods

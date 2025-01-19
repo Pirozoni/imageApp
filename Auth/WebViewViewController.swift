@@ -1,9 +1,9 @@
 import UIKit
 import WebKit
 
-enum WebViewConstants {
-    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-}
+//enum WebViewConstants {
+//    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
+//}
 
 protocol WebViewViewControllerDelegate: AnyObject {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
@@ -59,8 +59,9 @@ final class WebViewViewController: UIViewController {
     }
     
     private func loadAuthView() {
-        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
-            return
+        guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else {
+            print("Логирование ошибки")
+            preconditionFailure("Invalid token")
         }
         
         urlComponents.queryItems = [
@@ -71,7 +72,8 @@ final class WebViewViewController: UIViewController {
         ]
         
         guard let url = urlComponents.url else {
-            return
+            print("Логирование ошибки")
+            preconditionFailure("Error OAuth urlComponents.url")
         }
         
         let request = URLRequest(url: url)
@@ -86,15 +88,15 @@ extension WebViewViewController: WKNavigationDelegate {
         decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
-         if let code = code(from: navigationAction) {
-                //TODO: process code
+        if let code = fetchCode(from: navigationAction) {
                 decisionHandler(.cancel)
-          } else {
-                decisionHandler(.allow)
+                delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+            } else {
+                    decisionHandler(.allow)
+                }
             }
-    }
     
-    private func code(from navigationAction: WKNavigationAction) -> String? {
+    private func fetchCode(from navigationAction: WKNavigationAction) -> String? {
         if
             let url = navigationAction.request.url,
             let urlComponents = URLComponents(string: url.absoluteString),
