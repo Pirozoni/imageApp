@@ -11,9 +11,9 @@ final class OAuth2Service {
     }()
     private init() {}
     
-    func makeOAuthTokenRequest(code: String) -> URLRequest? {
+    private func makeOAuthTokenRequest(code: String) -> URLRequest? {
            guard var urlComponents = URLComponents(string: Constants.unsplashGetTokenURLString) else {
-               print("Логирование ошибки")
+               print("Логирование ошибки: failed URL components")
                return nil
            }
            
@@ -26,7 +26,7 @@ final class OAuth2Service {
            ]
            
            guard let url = urlComponents.url else {
-               print("Логирование ошибки")
+               print("Логирование ошибки: failed group of URL components")
                return nil
            }
            
@@ -48,14 +48,14 @@ final class OAuth2Service {
               case .success(let data):
                   do {
                       let responseBody = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                      print(responseBody)
-                      print(responseBody.accessToken)
                       self.storage.token = responseBody.accessToken
                       completion(.success(responseBody.accessToken))
                   } catch {
+                      print("Логирование ошибки: decode failure")
                       completion(.failure(error))
                   }
               case .failure(let error):
+                  print("Логирование ошибки: failure")
                   completion(.failure(error))
               }
           }

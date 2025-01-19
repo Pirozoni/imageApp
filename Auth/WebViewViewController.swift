@@ -1,10 +1,6 @@
 import UIKit
 import WebKit
 
-//enum WebViewConstants {
-//    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-//}
-
 protocol WebViewViewControllerDelegate: AnyObject {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
     func webViewViewControllerDidCancel(_ vc: WebViewViewController)
@@ -60,7 +56,7 @@ final class WebViewViewController: UIViewController {
     
     private func loadAuthView() {
         guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else {
-            print("Логирование ошибки")
+            print("Логирование ошибки: invalid token")
             preconditionFailure("Invalid token")
         }
         
@@ -72,7 +68,7 @@ final class WebViewViewController: UIViewController {
         ]
         
         guard let url = urlComponents.url else {
-            print("Логирование ошибки")
+            print("Логирование ошибки: error OAuth urlComponents.url")
             preconditionFailure("Error OAuth urlComponents.url")
         }
         
