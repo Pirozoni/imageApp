@@ -29,4 +29,38 @@ extension URLSession {
         })
         return task
     }
+    func objectTask<T: Decodable>(
+            for request: URLRequest,
+            completion: @escaping (Result<T, Error>) -> Void
+        ) -> URLSessionTask {
+            let fulfillCompletionOnTheMainThread: (Result<T, Error>) -> Void = { result in
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+            
+            let task = data(for: request) { (result: Result<Data, Error>) in
+                switch result {
+                case .success(let data):
+                    do {
+                        let decoder: JSONDecoder = {
+                            let decoder = JSONDecoder()
+                            decoder.keyDecodingStrategy = .convertFromSnakeCase
+                            return decoder
+                        }()
+                        
+                        let result = try decoder.decode(T.self, from: data)
+                        fulfillCompletionOnTheMainThread(.success(result))
+                    } catch {
+                        print("Decode error in \(#function): \(error.localizedDescription), Response: \(String(data: data, encoding: .utf8) ?? "")")
+                        fulfillCompletionOnTheMainThread(.failure(NetworkError.decodingError(error)))
+                    }
+                case .failure(let error):
+                    print("Error in \(#function): \(error.localizedDescription)")
+                    fulfillCompletionOnTheMainThread(.failure(error))
+                }
+            }
+            task.resume()
+            return task
+        }
 }
