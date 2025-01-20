@@ -62,9 +62,9 @@
 			path = imageAppUITests;
 			sourceTree = "<group>";
 		};
-		C386A0D42D3AC3E6002E76A2 /* Auth */ = {
+		C386A0D42D3AC3E6002E76A2 /* Auth+Web */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Auth;
+			path = "Auth+Web";
 			sourceTree = "<group>";
 		};
 		C386A0E92D3D9853002E76A2 /* SplashViewController */ = {
@@ -107,7 +107,7 @@
 				C3490DF62CCBD6C00092BC13 /* imageAppTests */,
 				C3490E002CCBD6C00092BC13 /* imageAppUITests */,
 				C3490DDE2CCBD6BC0092BC13 /* Products */,
-				C386A0D42D3AC3E6002E76A2 /* Auth */,
+				C386A0D42D3AC3E6002E76A2 /* Auth+Web */,
 				C386A0E92D3D9853002E76A2 /* SplashViewController */,
 			);
 			sourceTree = "<group>";
@@ -139,7 +139,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				C3490DDF2CCBD6BC0092BC13 /* imageApp */,
-				C386A0D42D3AC3E6002E76A2 /* Auth */,
+				C386A0D42D3AC3E6002E76A2 /* Auth+Web */,
 				C386A0E92D3D9853002E76A2 /* SplashViewController */,
 			);
 			name = imageApp;
