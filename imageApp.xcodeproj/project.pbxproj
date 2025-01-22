@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C3049BC82D4151790009EA96 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C3049BC72D4151790009EA96 /* Kingfisher */; };
 		C353C3902D3EEEBD00AE49FE /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = C353C38F2D3EEEBD00AE49FE /* ProgressHUD */; };
+		C3747E1B2D4177BE00BF5B44 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = C3747E1A2D4177BE00BF5B44 /* SwiftKeychainWrapper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 			files = (
 				C3049BC82D4151790009EA96 /* Kingfisher in Frameworks */,
 				C353C3902D3EEEBD00AE49FE /* ProgressHUD in Frameworks */,
+				C3747E1B2D4177BE00BF5B44 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +150,7 @@
 			packageProductDependencies = (
 				C353C38F2D3EEEBD00AE49FE /* ProgressHUD */,
 				C3049BC72D4151790009EA96 /* Kingfisher */,
+				C3747E1A2D4177BE00BF5B44 /* SwiftKeychainWrapper */,
 			);
 			productName = imageApp;
 			productReference = C3490DDD2CCBD6BC0092BC13 /* imageApp.app */;
@@ -234,6 +237,7 @@
 			packageReferences = (
 				C353C38E2D3EEEBD00AE49FE /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 				C3049BC62D4151790009EA96 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				C3747E192D4177BE00BF5B44 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C3490DDE2CCBD6BC0092BC13 /* Products */;
@@ -614,6 +618,14 @@
 				version = 14.1.3;
 			};
 		};
+		C3747E192D4177BE00BF5B44 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = exactVersion;
+				version = 4.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -626,6 +638,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C353C38E2D3EEEBD00AE49FE /* XCRemoteSwiftPackageReference "ProgressHUD" */;
 			productName = ProgressHUD;
+		};
+		C3747E1A2D4177BE00BF5B44 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C3747E192D4177BE00BF5B44 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
