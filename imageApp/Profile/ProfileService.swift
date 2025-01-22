@@ -1,7 +1,7 @@
 import UIKit
 
 final class ProfileService {
-    struct ProfileResult: Codable { }
+//    struct ProfileResult: Codable { }
     
     static let shared = ProfileService()
     private var currentTask: URLSessionTask?

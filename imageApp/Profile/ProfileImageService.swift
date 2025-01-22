@@ -1,7 +1,7 @@
 import Foundation
 
 final class ProfileImageService {
-    struct UserResult: Codable {}
+//    struct UserResult: Codable {}
     
     static let shared = ProfileImageService()
     

@@ -1,10 +1,13 @@
 import UIKit
+import Foundation
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
     // MARK: - Private Properties
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     private lazy var avatarImageView: UIImageView = {
         let view = UIImageView()
@@ -44,6 +47,11 @@ final class ProfileViewController: UIViewController {
         drawSelf()
         setupView()
         updateProfileDetails()
+        
+        if let url = profileImageService.avatarURL {
+            updateAvatar(url: url)
+        }
+        addProfileImageObserver()
     }
     
     // MARK: - Private Methods
@@ -119,7 +127,6 @@ final class ProfileViewController: UIViewController {
     
     private func updateProfileDetails() {
         guard let profile = profileService.profile else { return }
-        //TODO ProfileImage
         
         self.nameLabel.text = profile.name
         self.loginNameLabel.text = profile.loginName
@@ -129,66 +136,41 @@ final class ProfileViewController: UIViewController {
         }
     }
     
-    
-       
-//       override init(nibName: String?, bundle: Bundle?) {
-//            super.init(nibName: nibName, bundle: bundle)
-//            addObserver()
-//        }
-//        
-//        // Определяем конструктор, необходимый при декодировании
-//        // класса из Storyboard
-//        
-//        required init?(coder: NSCoder) {
-//            super.init(coder: coder)
-//            addObserver()
-//        }
-//        
-//        // Определяем деструктор
-//        
-//        deinit {
-//            removeObserver()
-//        }
-//        
-//        private func addObserver() {
-//            NotificationCenter.default.addObserver(                 // 1
-//                self,                                               // 2
-//                selector: #selector(updateAvatar(notification:)),   // 3
-//                name: ProfileImageService.didChangeNotification,    // 4
-//                object: nil)                                        // 5
-//        }
-//       
-//       private func removeObserver() {
-//            NotificationCenter.default.removeObserver(              // 6
-//                self,                                               // 7
-//                name: ProfileImageService.didChangeNotification,    // 8
-//                object: nil)                                        // 9
-//        }
-//       
-//        @objc                                                       // 10
-//        private func updateAvatar(notification: Notification) {     // 11
-//            guard
-//                isViewLoaded,                                       // 12
-//                let userInfo = notification.userInfo,               // 13
-//                let profileImageURL = userInfo["URL"] as? String,   // 14
-//                let url = URL(string: profileImageURL)              // 15
-//            else { return }
-//            
-//            // TODO [Sprint 11] Обновите аватар, используя Kingfisher
-//        }
-//        
-//        override func viewDidLoad() {
-//            super.viewDidLoad()
-//            
-//            if let avatarURL = ProfileImageService.shared.avatarURL,// 16
-//               let url = URL(string: avatarURL) {                   // 17
-//                // TODO [Sprint 11]  Обновите аватар, если нотификация
-//                // была опубликована до того, как мы подписались.
-//            }
-//        }
-//        
-//        // ...
-
+    private func addProfileImageObserver() {
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: Constants.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] notification in
+                guard let self else { return }
+                self.updateAvatar(notification: notification)
+            }
     }
+    
+    @objc
+    private func updateAvatar(notification: Notification) {
+        guard
+            isViewLoaded,
+            let profileImageURL = notification.userInfoImageURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        
+        updateAvatar(url: url)
+    }
+    
+    private func updateAvatar(url: URL) {
+        avatarImageView.kf.indicatorType = .activity
+        let processor = RoundCornerImageProcessor(cornerRadius: 61/*, backgroundColor: .ypBackgroundIOS*/)
+        avatarImageView.kf.setImage(with: url, options: [.processor(processor)])
+    }
+}
 
+// MARK: - Extension
+extension Notification {
+    static let userInfoImageURLKey: String = "URL"
+    var userInfoImageURL: String? {
+        userInfo?[Notification.userInfoImageURLKey] as? String
+    }
+}
 
