@@ -1,7 +1,6 @@
 import UIKit
 
 final class ProfileService {
-//    struct ProfileResult: Codable { }
     
     static let shared = ProfileService()
     private var currentTask: URLSessionTask?
@@ -10,7 +9,7 @@ final class ProfileService {
     private(set) var profile: Profile?
     private let builder = URLRequestBuilder.shared
     
-    private init () {}
+    private init() {}
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread, "Not in Main thread")
@@ -24,7 +23,6 @@ final class ProfileService {
             }
             lastToken = token
         }
-        
         guard let request: URLRequest = makeProfileRequest() else {
             completion(.failure(AuthServiceError.invalidRequest))
             return
@@ -50,11 +48,11 @@ final class ProfileService {
         task.resume()
     }
     
-            func makeProfileRequest() -> URLRequest? {
-                builder.makeHTTPRequest(
-                    path: "/me",
-                    httpMethod: "GET",
-                    baseURLString: Constants.defaultBaseAPIURLString
-                )
-            }
+    func makeProfileRequest() -> URLRequest? {
+        builder.makeHTTPRequest(
+            path: "/me",
+            httpMethod: "GET",
+            baseURLString: Constants.defaultBaseAPIURLString
+        )
+    }
 }

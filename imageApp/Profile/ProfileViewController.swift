@@ -1,5 +1,4 @@
 import UIKit
-import Foundation
 import Kingfisher
 
 final class ProfileViewController: UIViewController {
@@ -155,13 +154,12 @@ final class ProfileViewController: UIViewController {
             let profileImageURL = notification.userInfoImageURL,
             let url = URL(string: profileImageURL)
         else { return }
-        
         updateAvatar(url: url)
     }
     
     private func updateAvatar(url: URL) {
         avatarImageView.kf.indicatorType = .activity
-        let processor = RoundCornerImageProcessor(cornerRadius: 61/*, backgroundColor: .ypBackgroundIOS*/)
+        let processor = RoundCornerImageProcessor(cornerRadius: 61, backgroundColor: .systemBackground)
         avatarImageView.kf.setImage(with: url, options: [.processor(processor)])
     }
 }

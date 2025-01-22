@@ -11,8 +11,14 @@ final class SplashViewController: UIViewController {
     private let storage = OAuth2TokenStorage.shared
     private let profileImageService = ProfileImageService.shared
     private var authenticateStatus = false
+    private var splashScreenLogoImageView: UIImageView?
     
     // MARK: - Override Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupSplashScreen()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
@@ -24,11 +30,12 @@ final class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if oauth2TokenStorage.token != nil {
-            switchToTabBarController()
-        } else {
-            performSegue(withIdentifier: Constants.showAuthenticationScreenSegueIdentifier, sender: nil)
-        }
+        authenticate()
+        //        if oauth2TokenStorage.token != nil {
+        //            switchToTabBarController()
+        //        } else {
+        //            performSegue(withIdentifier: Constants.showAuthenticationScreenSegueIdentifier, sender: nil)
+        //        }
     }
     
     // MARK: - Private Methods
@@ -110,6 +117,37 @@ final class SplashViewController: UIViewController {
             showAuthController()
         }
     }
+    private func setSplashScreenLogoImageView() {
+        let splashScreenLogoImageView = UIImageView()
+        let splashScreenLogo = UIImage(named: "splashScreenLogo")
+        splashScreenLogoImageView.image = splashScreenLogo
+        splashScreenLogoImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(splashScreenLogoImageView)
+        splashScreenLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        splashScreenLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        splashScreenLogoImageView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        splashScreenLogoImageView.widthAnchor.constraint(equalToConstant: 72).isActive = true
+        self.splashScreenLogoImageView = splashScreenLogoImageView
+    }
+    
+    private func setupSplashScreen() {
+        setSplashScreenLogoImageView()
+        view.backgroundColor = .ypBlack
+    }
+    
+    private func authenticate() {
+        guard !authenticateStatus else { return }
+        authenticateStatus = true
+        if storage.token != nil {
+            UIBlockingProgressHUD.show()
+            fetchProfile { [weak self] in
+                guard let self else { return }
+                UIBlockingProgressHUD.dismiss()
+                self.switchToTabBarController()}
+        } else {
+            showAuthController()
+        }
+    }
 }
 
 // MARK: - Extension
@@ -119,19 +157,19 @@ extension SplashViewController: UITableViewDelegate {
     }
 }
 
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)") }
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
-}
+//extension SplashViewController {
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == showAuthenticationScreenSegueIdentifier {
+//            guard
+//                let navigationController = segue.destination as? UINavigationController,
+//                let viewController = navigationController.viewControllers[0] as? AuthViewController
+//            else { fatalError("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)") }
+//            viewController.delegate = self
+//        } else {
+//            super.prepare(for: segue, sender: sender)
+//        }
+//    }
+//}
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
