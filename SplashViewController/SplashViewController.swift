@@ -1,4 +1,5 @@
 import UIKit
+import ProgressHUD
 
 final class SplashViewController: UIViewController {
     
@@ -6,7 +7,11 @@ final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let oauth2Service = OAuth2Service.shared
     private let oauth2TokenStorage = OAuth2TokenStorage.shared
-
+    private let profileService = ProfileService.shared
+    private let storage = OAuth2TokenStorage.shared
+    private let profileImageService = ProfileImageService.shared
+    private var authenticateStatus = false
+    
     // MARK: - Override Methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,7 +30,7 @@ final class SplashViewController: UIViewController {
             performSegue(withIdentifier: Constants.showAuthenticationScreenSegueIdentifier, sender: nil)
         }
     }
-
+    
     // MARK: - Private Methods
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
@@ -33,9 +38,81 @@ final class SplashViewController: UIViewController {
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
     }
+    
+    private func fetchOAuthToken(_ code: String) {
+        oauth2Service.fetchOAuthToken(code) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success:
+                self.switchToTabBarController()
+            case .failure:
+                break
+            }
+        }
+    }
+    private func fetchProfile(completion: @escaping () -> Void) {
+        guard let token = storage.token else { return }
+        profileService.fetchProfile(token) { [weak self] result in
+            guard let self else { return }
+            
+            switch result {
+            case .success(let profile):
+                self.switchToTabBarController()
+                let username = profile.userName
+                self.fetchProfileImageURL(username: username)
+            case .failure(let error):
+                print("Fetch token error in \(#function): error = \(error)")
+                self.showLoginAlert()
+            }
+            completion()
+        }
+    }
+    
+    private func fetchProfileImageURL(username: String) {
+        profileImageService.fetchProfileImageURL(with: username) { result in
+            switch result {
+            case .success(let imageURL):
+                print("imageURL - \(imageURL)")
+            case .failure(let error):
+                print("Fetch image error in \(#function): error = \(error)")
+                self.showLoginAlert()
+            }
+        }
+    }
+    
+    private func showAuthController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        guard
+            let navigationViewController = storyboard.instantiateViewController(withIdentifier: Constants.navigationController) as? UINavigationController,
+            let authViewController = navigationViewController.topViewController as? AuthViewController
+        else {
+            print("Failed to create AuthViewController \(#function)")
+            return
+        }
+        authViewController.delegate = self
+        navigationViewController.modalPresentationStyle = .fullScreen
+        present(navigationViewController, animated: true) {
+        }
+    }
+    
+    private func isAuthenticated() {
+        guard !authenticateStatus else { return }
+        
+        authenticateStatus = true
+        if storage.token != nil {
+            UIBlockingProgressHUD.show()
+            fetchProfile { [weak self] in
+                guard let self else { return }
+                UIBlockingProgressHUD.dismiss()
+                self.switchToTabBarController()
+            }
+        } else {
+            showAuthController()
+        }
+    }
 }
 
-    // MARK: - Extension
+// MARK: - Extension
 extension SplashViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: Constants.showAuthenticationScreenSegueIdentifier, sender: nil)
@@ -63,16 +140,19 @@ extension SplashViewController: AuthViewControllerDelegate {
             self.fetchOAuthToken(code)
         }
     }
-
-    private func fetchOAuthToken(_ code: String) {
-        oauth2Service.fetchOAuthToken(code) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success:
-                self.switchToTabBarController()
-            case .failure:
-                break
+    private func showLoginAlert() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { preconditionFailure("weak self error")}
+            let alertModel = AlertModel(
+                title: "Что-то пошло не так(",
+                message: "Не удалось войти в систему",
+                buttonText: "Ок"
+            ) { [weak self] in
+                guard let self else { preconditionFailure("weak self error")}
+                self.authenticateStatus = false
+                self.isAuthenticated()
             }
+            AlertPresenter.showAlert(model: alertModel, vc: self)
         }
     }
 }

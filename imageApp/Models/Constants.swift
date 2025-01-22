@@ -15,4 +15,9 @@ enum Constants {
     static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     static let unsplashGetTokenURLString = "https://unsplash.com/oauth/token"
     static let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
+    static let defaultBaseAPIURLString = "https://api.unsplash.com"
+    static let defaultBaseURLString = "https://unsplash.com"
+    static let unsplashGetProfileURLString = "https://unsplash.com/me"
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
+    static let navigationController = "NavigationControllerID"
 }

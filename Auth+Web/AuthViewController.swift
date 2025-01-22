@@ -52,6 +52,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
             ProgressHUD.dismiss()
         }
     }
+    
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         vc.dismiss(animated: true)
     }

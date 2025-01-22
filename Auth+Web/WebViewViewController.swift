@@ -15,11 +15,15 @@ final class WebViewViewController: UIViewController {
     // MARK: - Public properties
     weak var delegate: WebViewViewControllerDelegate?
     
+    // MARK: - Private properties
+    private var estimatedProgressObservation: NSKeyValueObservation?
+    
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.navigationDelegate = self
         loadAuthView()
+        observerWKWebViewProgress()
     }
     
     override func observeValue(
@@ -38,25 +42,35 @@ final class WebViewViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil)
+                            options: .new,
+                            context: nil)
         updateProgress()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
     }
-
+    
     // MARK: - Private Methods
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
         progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
     
+    private func observerWKWebViewProgress() {
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 self.updateProgress()
+             })
+    }
+    
     private func loadAuthView() {
         guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else {
-            print("Логирование ошибки: invalid token")
+            print("Логирование ошибки: invalid token in \(#function)")
             preconditionFailure("Invalid token")
         }
         
@@ -77,7 +91,7 @@ final class WebViewViewController: UIViewController {
     }
 }
 
-    // MARK: - Extensions
+// MARK: - Extensions
 extension WebViewViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
@@ -85,12 +99,12 @@ extension WebViewViewController: WKNavigationDelegate {
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
         if let code = fetchCode(from: navigationAction) {
-                decisionHandler(.cancel)
-                delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-            } else {
-                    decisionHandler(.allow)
-                }
-            }
+            decisionHandler(.cancel)
+            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
     
     private func fetchCode(from navigationAction: WKNavigationAction) -> String? {
         if
@@ -106,5 +120,5 @@ extension WebViewViewController: WKNavigationDelegate {
         }
     }
 }
-    
- 
+
+

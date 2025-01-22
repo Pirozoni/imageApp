@@ -47,7 +47,7 @@ final class OAuth2Service {
     
     // MARK: - Public Methods
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        assert(Thread.isMainThread, "Not in Main tread")
+        assert(Thread.isMainThread, "Not in Main thread")
         if task != nil {
             if lastCode != code {
                 task?.cancel()
@@ -83,7 +83,7 @@ final class OAuth2Service {
         self.task = task
         task.resume()
     }
-    //        let task = urlSession.data(for: request) { [weak self] result in
+    //        let task = urlSession.objectTask(for: request) { [weak self] result in
     //            guard let self else { return }
     //
     //            switch result {
