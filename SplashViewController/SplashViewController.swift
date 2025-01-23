@@ -14,11 +14,6 @@ final class SplashViewController: UIViewController {
     private var splashScreenLogoImageView: UIImageView?
     
     // MARK: - Override Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupSplashScreen()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
@@ -26,6 +21,11 @@ final class SplashViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupSplashScreen()
     }
     
     override func viewDidAppear(_ animated: Bool) {
