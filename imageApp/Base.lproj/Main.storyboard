@@ -173,7 +173,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Rsn-HN-PCT">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="Cu5-vG-51e" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="Cu5-vG-51e" customClass="TabBarController" customModule="imageApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3K1-O2-XEW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
