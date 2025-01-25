@@ -15,11 +15,6 @@ final class OAuth2Service {
     // MARK: - Private Properties
     private let storage = OAuth2TokenStorage.shared
     private let urlSession = URLSession.shared
-    private let decoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }()
     private let builder = URLRequestBuilder.shared
     private var task: URLSessionTask?
     private var lastCode: String?
@@ -86,7 +81,7 @@ final class OAuth2Service {
             assertionFailure("Failed to create URL")
             return nil
         }
-        var request = builder.makeHTTPRequest(path: url, httpMethod: "POST", baseURLString: Constants.defaultBaseURLString)
+        let request = builder.makeHTTPRequest(path: url, httpMethod: "POST", baseURLString: Constants.defaultBaseURLString)
         
         return request
     }

@@ -184,13 +184,10 @@
                             <color key="backgroundColor" red="0.1019607843" green="0.1058823529" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                         </tabBarAppearance>
                     </tabBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="xr9-UD-yzS"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ch-75-VSe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1187" y="-287"/>
+            <point key="canvasLocation" x="-1137" y="-6"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="rxZ-Il-bOg">
@@ -242,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbh-2A-6se" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="608.39694656488552" y="688.73239436619724"/>
+            <point key="canvasLocation" x="526" y="689"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CHb-j8-TEQ">
@@ -260,7 +257,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E3o-k6-ijB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-318.32061068702291" y="688.73239436619724"/>
+            <point key="canvasLocation" x="-318" y="689"/>
         </scene>
         <!--Web View View Controller-->
         <scene sceneID="7ds-7a-4w3">
@@ -303,7 +300,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZMO-RP-KD1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1511" y="689"/>
+            <point key="canvasLocation" x="1369" y="689"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="oKj-h8-W8c">
@@ -330,7 +327,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-1187" y="689"/>
+            <point key="canvasLocation" x="-1138" y="689"/>
         </scene>
     </scenes>
     <color key="tintColor" name="YPBlack"/>

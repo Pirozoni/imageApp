@@ -6,7 +6,6 @@ final class SplashViewController: UIViewController {
     // MARK: - Private Properties
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let oauth2Service = OAuth2Service.shared
-    private let oauth2TokenStorage = OAuth2TokenStorage.shared
     private let profileService = ProfileService.shared
     private let storage = OAuth2TokenStorage.shared
     private let profileImageService = ProfileImageService.shared
@@ -118,7 +117,7 @@ final class SplashViewController: UIViewController {
             
             switch result {
             case .success(let profile):
-                let username = profile.userName
+                let username = profile.username
                 self.fetchProfileImageURL(username: username)
             case .failure(let error):
                 print("Fetch token error in \(#function): error = \(error)")

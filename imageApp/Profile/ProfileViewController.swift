@@ -114,13 +114,10 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupView() {
-        nameLabel.text = "Екатерина Новикова"
+        
+        view.backgroundColor = .ypBlack
         nameLabel.textColor = .ypWhite
-        
-        loginNameLabel.text = "@ekaterina_nov"
         loginNameLabel.textColor = .ypGray
-        
-        descriptionLabel.text = "Hello, World!"
         descriptionLabel.textColor = .ypWhite
     }
     
@@ -131,7 +128,7 @@ final class ProfileViewController: UIViewController {
         self.loginNameLabel.text = profile.loginName
         self.descriptionLabel.text = profile.bio
         
-        profileImageService.fetchProfileImageURL(with: profile.userName) { _ in
+        profileImageService.fetchProfileImageURL(with: profile.username) { _ in
         }
     }
     
@@ -159,7 +156,7 @@ final class ProfileViewController: UIViewController {
     
     private func updateAvatar(url: URL) {
         avatarImageView.kf.indicatorType = .activity
-        let processor = RoundCornerImageProcessor(cornerRadius: 61, backgroundColor: .systemBackground)
+        let processor = RoundCornerImageProcessor(cornerRadius: 61, backgroundColor: .ypBlack)
         avatarImageView.kf.setImage(with: url, options: [.processor(processor)])
     }
 }

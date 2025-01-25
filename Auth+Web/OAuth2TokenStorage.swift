@@ -15,7 +15,7 @@ final class OAuth2TokenStorage {
     }
     
     private enum Keys: String {
-        case token
+        case token = "Auth token"
     }
     
     static let shared = OAuth2TokenStorage()
