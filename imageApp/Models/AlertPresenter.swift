@@ -4,7 +4,7 @@ protocol AlertPresenterProtocol {
     static func showAlert(model: AlertModel, vc: UIViewController)
 }
 
-class AlertPresenter: AlertPresenterProtocol {
+final class AlertPresenter: AlertPresenterProtocol {
     
     private init() { }
     
@@ -19,16 +19,5 @@ class AlertPresenter: AlertPresenterProtocol {
         }
         alertController.addAction(alertAction)
         vc.present(alertController, animated: true, completion: nil)
-        
-        
-//        if var topController = UIApplication.shared.keyWindow?.rootViewController {
-//            while let presentedViewController = topController.presentedViewController {
-//                topController = presentedViewController
-//            }
-//            topController.present(alertController, animated: true, completion: nil)
-//        } else {
-//            vc.present(alertController, animated: true, completion: nil)
-//        }
-//        
     }
 }

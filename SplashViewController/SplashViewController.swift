@@ -164,14 +164,8 @@ final class SplashViewController: UIViewController {
         }
     }
 }
+
 // MARK: - Extension
-//extension SplashViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: Constants.showAuthenticationScreenSegueIdentifier, sender: nil)
-//    }
-//}
-//
-//
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         dismiss(animated: true) { [weak self] in
@@ -179,5 +173,4 @@ extension SplashViewController: AuthViewControllerDelegate {
             self.fetchOAuthToken(code)
         }
     }
-    
 }
