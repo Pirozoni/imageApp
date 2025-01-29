@@ -14,7 +14,7 @@ final class ImagesListViewController: UIViewController {
     
     // MARK: - Private Properties
     private let imagesListService: ImagesListService = ImagesListService.shared
-    private var photos: [Photo] = [/*String*/] /*= Array(0..<20).map{ "\($0)"}*/
+    private var photos: [Photo] = []
     private var imagesListServiceObserver: NSObjectProtocol? = nil
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -40,13 +40,13 @@ final class ImagesListViewController: UIViewController {
                 return
             }
             let photo = photos[indexPath.row]
-//            let image = UIImage(named: photos[indexPath.row])
             viewController.photo = photo
         } else {
             super.prepare(for: segue, sender: sender)
         }
     }
     
+    // MARK: - Private Methods
     private func addImagesListServiceObserver() {
         imagesListServiceObserver = NotificationCenter.default
             .addObserver(
@@ -59,6 +59,7 @@ final class ImagesListViewController: UIViewController {
                 }
             )
     }
+    
     private func updateTableViewAnimated() {
         guard let tableView else {
             preconditionFailure("table view doesn't exist")
@@ -76,20 +77,21 @@ final class ImagesListViewController: UIViewController {
         }
     }
 }
+
 // MARK: - Extensions
 extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let photo = photos[indexPath.row]
-//        guard let photo = UIImage(named: photos[indexPath.row]) else {
-//            return
-//        }
+        let url = photo.thumbImageURL
+        cell.cellImage.kf.setImage(with: url, placeholder:UIImage(named: "cellPlaceholder"))
+        if let photoDate = photos[indexPath.row].createdAt, let date = dateFormatter.date(from: photoDate) {
+            cell.dateLabel.text = dateFormatter.string(from: date)
+        } else {
+            cell.dateLabel.text = ""
+        }
+        cell.likeButton.setImage(photo.isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff"), for: .normal)
         
-        cell.cellImage.image = photo
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-        
-        let isLiked = indexPath.row % 2 == 0
-        let likePhoto = isLiked ? UIImage(named: "Like") : UIImage(named: "Dislike")
-        cell.likeButton.setImage(likePhoto, for: .normal)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
 
@@ -121,10 +123,6 @@ extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let image = photos[indexPath.row]
-//        guard let photo = UIImage(named: photos[indexPath.row]) else {
-//            return 0
-//        }
-        
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.right - imageInsets.left
         let imageWidth = image.size.width
