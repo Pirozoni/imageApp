@@ -80,22 +80,6 @@ final class ImagesListViewController: UIViewController {
 }
 
 // MARK: - Extensions
-extension ImagesListViewController {
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        let photo = photos[indexPath.row]
-        let url = photo.thumbImageURL
-        cell.cellImage.kf.setImage(with: url, placeholder:UIImage(named: "cellPlaceholder"))
-        if let photoDate = photos[indexPath.row].createdAt, let date = dateFormatter.date(from: photoDate) {
-            cell.dateLabel.text = dateFormatter.string(from: date)
-        } else {
-            cell.dateLabel.text = ""
-        }
-        cell.likeButton.setImage(photo.isLiked ? UIImage(named: "Like") : UIImage(named: "Dislike"), for: .normal)
-        
-        tableView.reloadRows(at: [indexPath], with: .automatic)
-    }
-}
-
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
@@ -113,6 +97,7 @@ extension ImagesListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         configCell(for: imageListCell, with: indexPath)
+        imageListCell.delegate = self
         return imageListCell
     }
     
@@ -130,6 +115,22 @@ extension ImagesListViewController: UITableViewDataSource {
         let scale = imageViewWidth / imageWidth
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
+    }
+}
+
+extension ImagesListViewController {
+    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+        let photo = photos[indexPath.row]
+        let url = photo.thumbImageURL
+        cell.cellImage.kf.setImage(with: url, placeholder:UIImage(named: "cellPlaceholder"))
+        if let photoDate = photos[indexPath.row].createdAt, let date = dateFormatter.date(from: photoDate) {
+            cell.dateLabel.text = dateFormatter.string(from: date)
+        } else {
+            cell.dateLabel.text = ""
+        }
+        cell.likeButton.setImage(photo.isLiked ? UIImage(named: "Like") : UIImage(named: "Dislike"), for: .normal)
+        
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
 

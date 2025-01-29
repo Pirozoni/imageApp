@@ -32,4 +32,3 @@ final class ImagesListCell: UITableViewCell {
         likeButton.setImage(isLike ? UIImage(named: "Like") : UIImage(named: "Dislike"), for: .normal)
     }
 }
-

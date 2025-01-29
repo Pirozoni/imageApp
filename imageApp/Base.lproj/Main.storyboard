@@ -52,6 +52,9 @@
                                                         <constraint firstAttribute="width" constant="44" id="vPd-gx-iEr"/>
                                                     </constraints>
                                                     <state key="normal" image="Like"/>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked:" destination="UKZ-i5-wS4" eventType="touchUpInside" id="Jge-5b-3Wz"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -305,7 +308,6 @@
         <!--Splash View Controller-->
         <scene sceneID="oKj-h8-W8c">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wit-wl-Zae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SplashViewController" id="30v-ef-vyq" customClass="SplashViewController" customModule="imageApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mhk-3v-J8X">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -326,6 +328,7 @@
                         <segue destination="xld-RN-hge" kind="presentation" identifier="ShowAuthenticationScreen" modalPresentationStyle="fullScreen" id="ahq-Mo-Cmp"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wit-wl-Zae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1138" y="689"/>
         </scene>
