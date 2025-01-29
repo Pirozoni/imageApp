@@ -14,7 +14,8 @@ final class ImagesListViewController: UIViewController {
     
     // MARK: - Private Properties
     private let imagesListService: ImagesListService = ImagesListService.shared
-    private let photos: [String] = Array(0..<20).map{ "\($0)"}
+    private var photos: [Photo] = [/*String*/] /*= Array(0..<20).map{ "\($0)"}*/
+    private var imagesListServiceObserver: NSObjectProtocol? = nil
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -26,6 +27,7 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        addImagesListServiceObserver()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -37,20 +39,50 @@ final class ImagesListViewController: UIViewController {
                 assertionFailure("Invalid segue destination")
                 return
             }
-            
-            let image = UIImage(named: photos[indexPath.row])
-            viewController.image = image
+            let photo = photos[indexPath.row]
+//            let image = UIImage(named: photos[indexPath.row])
+            viewController.photo = photo
         } else {
             super.prepare(for: segue, sender: sender)
+        }
+    }
+    
+    private func addImagesListServiceObserver() {
+        imagesListServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ImagesListService.didChangeNotification,
+                object: nil,
+                queue: .main,
+                using: { [weak self] _ in
+                    guard let self = self else { return }
+                    self.updateTableViewAnimated()
+                }
+            )
+    }
+    private func updateTableViewAnimated() {
+        guard let tableView else {
+            preconditionFailure("table view doesn't exist")
+        }
+        let oldCount = photos.count
+        let newCount = imagesListService.photos.count
+        photos = imagesListService.photos
+        if oldCount != newCount {
+            tableView.performBatchUpdates {
+                let indexPaths = (oldCount..<newCount).map { i in
+                    IndexPath(row: i, section: 0)
+                }
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            } completion: { _ in }
         }
     }
 }
 // MARK: - Extensions
 extension ImagesListViewController {
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        guard let photo = UIImage(named: photos[indexPath.row]) else {
-            return
-        }
+        let photo = photos[indexPath.row]
+//        guard let photo = UIImage(named: photos[indexPath.row]) else {
+//            return
+//        }
         
         cell.cellImage.image = photo
         cell.dateLabel.text = dateFormatter.string(from: Date())
@@ -87,15 +119,17 @@ extension ImagesListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let photo = UIImage(named: photos[indexPath.row]) else {
-            return 0
-        }
+        
+        let image = photos[indexPath.row]
+//        guard let photo = UIImage(named: photos[indexPath.row]) else {
+//            return 0
+//        }
         
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.right - imageInsets.left
-        let imageWidth = photo.size.width
+        let imageWidth = image.size.width
         let scale = imageViewWidth / imageWidth
-        let cellHeight = photo.size.height * scale + imageInsets.top + imageInsets.bottom
+        let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
     }
 }

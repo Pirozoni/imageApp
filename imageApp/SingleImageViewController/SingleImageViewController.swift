@@ -5,6 +5,7 @@
 import UIKit
 
 final class SingleImageViewController: UIViewController {
+    var photo: Photo?
     var image: UIImage? {
         didSet {
             guard isViewLoaded, let image else { return }
