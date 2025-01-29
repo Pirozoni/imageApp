@@ -27,6 +27,7 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        imagesListService.fetchPhotosNextPage { _ in }
         addImagesListServiceObserver()
     }
     
@@ -89,7 +90,7 @@ extension ImagesListViewController {
         } else {
             cell.dateLabel.text = ""
         }
-        cell.likeButton.setImage(photo.isLiked ? UIImage(named: "likeButtonOn") : UIImage(named: "likeButtonOff"), for: .normal)
+        cell.likeButton.setImage(photo.isLiked ? UIImage(named: "Like") : UIImage(named: "Dislike"), for: .normal)
         
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
@@ -129,5 +130,25 @@ extension ImagesListViewController: UITableViewDataSource {
         let scale = imageViewWidth / imageWidth
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
+    }
+}
+
+extension ImagesListViewController: imageListViewCellDelegate {
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        UIBlockingProgressHUD.show()
+        imagesListService.changeLike(photoId: photo.id, isLike: !photo.isLiked) { [weak self] response in
+            guard let self else { return }
+            switch response {
+            case.success(let currentLike):
+                self.photos[indexPath.row].isLiked = currentLike
+                cell.refreshLikeImage(to: currentLike)
+                UIBlockingProgressHUD.dismiss()
+            case.failure(let error):
+                UIBlockingProgressHUD.dismiss()
+                print("Cant refresh like condition \(error)")
+            }
+        }
     }
 }
