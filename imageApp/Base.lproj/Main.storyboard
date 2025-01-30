@@ -52,9 +52,6 @@
                                                         <constraint firstAttribute="width" constant="44" id="vPd-gx-iEr"/>
                                                     </constraints>
                                                     <state key="normal" image="Like"/>
-                                                    <connections>
-                                                        <action selector="likeButtonClicked:" destination="UKZ-i5-wS4" eventType="touchUpInside" id="Jge-5b-3Wz"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

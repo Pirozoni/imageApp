@@ -30,7 +30,6 @@ final class SingleImageViewController: UIViewController {
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
         rescaleAndCenterImageInScrollView(image: image)
-//        bringButtonsToFront()
         guard let url = photo?.largeImageURL else { return }
         loadImage(by: url)
     }
@@ -78,13 +77,10 @@ final class SingleImageViewController: UIViewController {
             guard let url = photo?.largeImageURL else { return }
             
             imageView.removeFromSuperview()
-            
             loadImage(by: url)
         }
         AlertPresenter.showAlert(model: alertModel, vc: self)
     }
-    
-    
     
     // MARK: - IB Action
     @IBAction private func backButton(_ sender: Any) {
@@ -116,10 +112,6 @@ final class SingleImageViewController: UIViewController {
             self.image = image
         }
     }
-//    private func bringButtonsToFront() {
-//        view.bringSubviewToFront(backButton)
-//        view.bringSubviewToFront(didTapShareButton)
-//    }
 }
 
     // MARK: - Extensions
