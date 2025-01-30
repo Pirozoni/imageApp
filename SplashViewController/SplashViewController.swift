@@ -141,7 +141,7 @@ final class SplashViewController: UIViewController {
             }
         }
     }
-
+    
     private func showLoginAlert() {
         DispatchQueue.main.async { [weak self] in
             guard let self else {
@@ -151,7 +151,9 @@ final class SplashViewController: UIViewController {
             let alertModel = AlertModel(
                 title: "Что-то пошло не так(",
                 message: "Не удалось войти в систему",
-                buttonText: "Ок"
+                firstButtonText: "Oк",
+                secondButtonText: nil
+                
             ) { [weak self] in
                 guard let self else {
                     print("Weak self error")
