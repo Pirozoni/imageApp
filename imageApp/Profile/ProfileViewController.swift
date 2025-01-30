@@ -168,6 +168,19 @@ final class ProfileViewController: UIViewController {
         window.rootViewController = SplashViewController()
         window.makeKeyAndVisible()
     }
+    
+    private func showLogoutAlert() {
+        let alertModel = AlertModel(
+            title: "Пока, пока!",
+            message: "Уверены что хотите выйти?",
+            firstButtonText: "Да", secondButtonText: "Нет"
+        ) { [weak self] in
+            guard let self else { return }
+            self.profileLogoutService.logout()
+            self.switchToSplashViewController()
+        }
+        AlertPresenter.showAlert(model: alertModel, vc: self)
+    }
 }
 
 // MARK: - Extension
