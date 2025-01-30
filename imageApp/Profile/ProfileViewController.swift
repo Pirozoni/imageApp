@@ -7,6 +7,7 @@ final class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private let profileLogoutService = ProfileLogoutService.shared
     
     private lazy var avatarImageView: UIImageView = {
         let view = UIImageView()
@@ -18,6 +19,8 @@ final class ProfileViewController: UIViewController {
         let button = UIButton()
         let buttonImage = UIImage(named: "Exit")
         button.setImage(buttonImage, for: .normal)
+        button.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -114,7 +117,6 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupView() {
-        
         view.backgroundColor = .ypBlack
         nameLabel.textColor = .ypWhite
         loginNameLabel.textColor = .ypGray
@@ -145,6 +147,10 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc
+    private func didTapLogoutButton() {
+        showLogoutAlert()
+    }
+    
     private func updateAvatar(notification: Notification) {
         guard
             isViewLoaded,
