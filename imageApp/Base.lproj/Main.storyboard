@@ -141,7 +141,7 @@
                                     <constraint firstAttribute="width" constant="48" id="V1c-w8-sGn"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="Backward"/>
+                                <state key="normal" image="nav_back_button"/>
                                 <connections>
                                     <action selector="backButton:" destination="KyH-Ri-LaU" eventType="touchUpInside" id="daH-5x-Yes"/>
                                 </connections>
@@ -333,7 +333,6 @@
     <color key="tintColor" name="YPBlack"/>
     <resources>
         <image name="0" width="1600" height="1059"/>
-        <image name="Backward" width="24" height="24"/>
         <image name="Like" width="42" height="42"/>
         <image name="Sharing 1" width="51" height="51"/>
         <image name="auth_screen_logo" width="60" height="60"/>
@@ -6065,6 +6064,7 @@ AAUpwwAFKcgABSnOAAUp1gAFKdgABSnaAAUp3AAFKd4ABTt+AAU7gwAFO5AABTuTAAU7oAAFO6UABTut
 AAU7sAAFO7UABTu9AAAAAAAABAEAAAAAAAAAaAAAAAAAAAAAAAAAAAAFO8A
 </mutableData>
         </image>
+        <image name="nav_back_button" width="24" height="24"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <namedColor name="YPBlack">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
