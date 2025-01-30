@@ -7,7 +7,7 @@ final class ImagesListService {
     private let builder = URLRequestBuilder.shared
     private var dataTask: URLSessionTask?
     private var likeTask: URLSessionTask?
-    private var pageCount: Int?
+    private var pageCount: Int? //?
     
     static let shared = ImagesListService()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
