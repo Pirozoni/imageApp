@@ -159,6 +159,15 @@ final class ProfileViewController: UIViewController {
         let processor = RoundCornerImageProcessor(cornerRadius: 61, backgroundColor: .ypBlack)
         avatarImageView.kf.setImage(with: url, options: [.processor(processor)])
     }
+    
+    private func switchToSplashViewController() {
+        guard let window = UIApplication.shared.windows.first else {
+            print("Error in \(#function): Invalid Configuration")
+            return
+        }
+        window.rootViewController = SplashViewController()
+        window.makeKeyAndVisible()
+    }
 }
 
 // MARK: - Extension
