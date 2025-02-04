@@ -47,11 +47,15 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0f-eW-Cch">
                                                     <rect key="frame" x="333" y="4" width="44" height="44"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Like"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="i9I-ko-4WA"/>
                                                         <constraint firstAttribute="width" constant="44" id="vPd-gx-iEr"/>
                                                     </constraints>
                                                     <state key="normal" image="Like"/>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked:" destination="UKZ-i5-wS4" eventType="touchUpInside" id="cpw-8U-p4E"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

@@ -145,13 +145,12 @@ extension ImagesListViewController: imageListViewCellDelegate {
         UIBlockingProgressHUD.show()
         imagesListService.changeLike(photoId: photo.id, isLike: !photo.isLiked) { [weak self] response in
             guard let self else { return }
+            UIBlockingProgressHUD.dismiss()
             switch response {
             case.success(let currentLike):
                 self.photos[indexPath.row].isLiked = currentLike
                 cell.refreshLikeImage(to: currentLike)
-                UIBlockingProgressHUD.dismiss()
             case.failure(let error):
-                UIBlockingProgressHUD.dismiss()
                 print("Cant refresh like condition \(error)")
             }
         }
