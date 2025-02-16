@@ -47,11 +47,15 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0f-eW-Cch">
                                                     <rect key="frame" x="333" y="4" width="44" height="44"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Like"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="i9I-ko-4WA"/>
                                                         <constraint firstAttribute="width" constant="44" id="vPd-gx-iEr"/>
                                                     </constraints>
                                                     <state key="normal" image="Like"/>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked:" destination="UKZ-i5-wS4" eventType="touchUpInside" id="cpw-8U-p4E"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -141,7 +145,7 @@
                                     <constraint firstAttribute="width" constant="48" id="V1c-w8-sGn"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="Backward"/>
+                                <state key="normal" image="nav_back_button"/>
                                 <connections>
                                     <action selector="backButton:" destination="KyH-Ri-LaU" eventType="touchUpInside" id="daH-5x-Yes"/>
                                 </connections>
@@ -305,7 +309,6 @@
         <!--Splash View Controller-->
         <scene sceneID="oKj-h8-W8c">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wit-wl-Zae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SplashViewController" id="30v-ef-vyq" customClass="SplashViewController" customModule="imageApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mhk-3v-J8X">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -326,6 +329,7 @@
                         <segue destination="xld-RN-hge" kind="presentation" identifier="ShowAuthenticationScreen" modalPresentationStyle="fullScreen" id="ahq-Mo-Cmp"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wit-wl-Zae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1138" y="689"/>
         </scene>
@@ -333,7 +337,6 @@
     <color key="tintColor" name="YPBlack"/>
     <resources>
         <image name="0" width="1600" height="1059"/>
-        <image name="Backward" width="24" height="24"/>
         <image name="Like" width="42" height="42"/>
         <image name="Sharing 1" width="51" height="51"/>
         <image name="auth_screen_logo" width="60" height="60"/>
@@ -6065,6 +6068,7 @@ AAUpwwAFKcgABSnOAAUp1gAFKdgABSnaAAUp3AAFKd4ABTt+AAU7gwAFO5AABTuTAAU7oAAFO6UABTut
 AAU7sAAFO7UABTu9AAAAAAAABAEAAAAAAAAAaAAAAAAAAAAAAAAAAAAFO8A
 </mutableData>
         </image>
+        <image name="nav_back_button" width="24" height="24"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <namedColor name="YPBlack">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -7,6 +7,7 @@ final class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private let profileLogoutService = ProfileLogoutService.shared
     
     private lazy var avatarImageView: UIImageView = {
         let view = UIImageView()
@@ -18,6 +19,8 @@ final class ProfileViewController: UIViewController {
         let button = UIButton()
         let buttonImage = UIImage(named: "Exit")
         button.setImage(buttonImage, for: .normal)
+        button.addTarget(self, action: #selector(didTapLogoutButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -114,7 +117,6 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupView() {
-        
         view.backgroundColor = .ypBlack
         nameLabel.textColor = .ypWhite
         loginNameLabel.textColor = .ypGray
@@ -145,6 +147,10 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc
+    private func didTapLogoutButton() {
+        showLogoutAlert()
+    }
+    
     private func updateAvatar(notification: Notification) {
         guard
             isViewLoaded,
@@ -158,6 +164,28 @@ final class ProfileViewController: UIViewController {
         avatarImageView.kf.indicatorType = .activity
         let processor = RoundCornerImageProcessor(cornerRadius: 61, backgroundColor: .ypBlack)
         avatarImageView.kf.setImage(with: url, options: [.processor(processor)])
+    }
+    
+    private func switchToSplashViewController() {
+        guard let window = UIApplication.shared.windows.first else {
+            print("Error in \(#function): Invalid Configuration")
+            return
+        }
+        window.rootViewController = SplashViewController()
+        window.makeKeyAndVisible()
+    }
+    
+    private func showLogoutAlert() {
+        let alertModel = AlertModel(
+            title: "Пока, пока!",
+            message: "Уверены что хотите выйти?",
+            firstButtonText: "Да", secondButtonText: "Нет"
+        ) { [weak self] in
+            guard let self else { return }
+            self.profileLogoutService.logout()
+            self.switchToSplashViewController()
+        }
+        AlertPresenter.showAlert(model: alertModel, vc: self)
     }
 }
 
